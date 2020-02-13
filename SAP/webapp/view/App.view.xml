@@ -1,9 +1,6 @@
-<mvc:View 
-	controllerName="project.controller.App"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+<mvc:View controllerName="project.controller.App" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc">
 	<!--<Text text="Hello World" /> -->
-	
+	<!-- items="{invoice>/Invoices}" -->
 	<Shell>
 		<App>
 			<pages>
@@ -11,36 +8,43 @@
 					<content>
 						<Panel headerText="{i18n>helloPanelTitle}">
 							<content>
-								<Button icon="sap-icon://account" text="{i18n>showHelloButtonText}" press=".onShowHello" />
-								
-								<Input 
-									value= "{/recipient/name}"
-									description="Hello {/recipient/name}"
-									valueLiveUpdate="true"
-									width="60%"
-								/>
-								
-								<List
-									headerText="{i18n>invoiceListTitle}"
-									class="sapUiResponsiveMargin" 
-									width="auto"
-									items="{invoice>/Invoices}"
-								>
+								<Button icon="sap-icon://account" text="{i18n>showHelloButtonText}" press=".onShowHello"/>
+								<Input value="{/recipient/name}" description="SICC {/recipient/name}" valueLiveUpdate="true" width="60%"/>
+								<Table id="invoiceList" class="sapUiResponsiveMargin" width="auto"
+									items="{ path: 'invoice>/Invoices', sorter: { path: 'Group', group: true, descending: false } }">
+									<headerToolbar>
+										<Toolbar>
+											<Title text="List - {i18n>invoiceListTitle}"/>
+											<ToolbarSpacer/>
+											<SearchField width="30%" search=".onFilterInvoices"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column>
+											<Text hAlign="End" text="Nome"/>
+										</Column>
+										<Column minScreenWidth="Small" demandPopin="true" width="4em">
+											<Text text="Quantidade"/>
+										</Column>
+										<Column minScreenWidth="Small" demandPopin="true">
+											<Text text="Status"/>
+										</Column>
+										<Column hAlign="End">
+											<Text text="Preço"/>
+										</Column>
+									</columns>
 									<items>
-										<ObjectListItem 
-											title="{invoice>Quantity} x {invoice>ProductName}" 
-											number="{
-														parts: [
-															{path: 'invoice>Price'},
-															'EUR'
-														],
-														type: 'sap.ui.model.type.Currency'
-													}"
-													numberUnit="EUR"
-										/>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier title="{invoice>ProductName}"/>
+												<ObjectNumber number="{invoice>Quantity}" emphasized="false"/>
+												<Text text="{path: 'invoice>Status', formatter: '.formatter.statusText'}"/>
+												<ObjectNumber number="{ parts: [ {path: 'invoice>Price'}, 'EUR' ], type: 'sap.ui.model.type.Currency' }" unit="EUR"
+													state="{= ${invoice>Price} > 50 ? 'Error' : 'Success' }"/>
+											</cells>
+										</ColumnListItem>
 									</items>
-								</List>
-									
+								</Table>
 							</content>
 						</Panel>
 					</content>
@@ -48,5 +52,4 @@
 			</pages>
 		</App>
 	</Shell>
-	
 </mvc:View>

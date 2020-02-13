@@ -1,20 +1,32 @@
 {
 	"Invoices": [
 		{
-			"ProductName": "Pineaple",
+			"ProductName": "Fatura #1",
 			"Quantity": 21,
-			"Price": 42.9999
+			"Price": 42.9999,
+			"Status": "A",
+			"Group": "Grupo 1"
 		},
 		{
-			"ProductName": "Apple",
+			"ProductName": "Fatura #2",
 			"Quantity": 11,
-			"Price": 22.72
+			"Price": 22.72,
+			"Status": "B",
+			"Group": "Grupo 2"
 		},
 		{
-			"ProductName": "Grape",
+			"ProductName": "Fatura #2",
+			"Quantity": 14,
+			"Price": 1.72,
+			"Status": "B",
+			"Group": "Grupo 2"
+		},
+		{
+			"ProductName": "Fatura #3",
 			"Quantity": 5,
-			"Price": 1222.72
+			"Price": 1222.72,
+			"Status": "C",
+			"Group": "Grupo 3"
 		}
-		
 	]
 }
