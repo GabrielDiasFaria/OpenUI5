@@ -1,0 +1,52 @@
+<mvc:View 
+	controllerName="project.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<!--<Text text="Hello World" /> -->
+	
+	<Shell>
+		<App>
+			<pages>
+				<Page title="{i18n>homePageTitle}">
+					<content>
+						<Panel headerText="{i18n>helloPanelTitle}">
+							<content>
+								<Button icon="sap-icon://account" text="{i18n>showHelloButtonText}" press=".onShowHello" />
+								
+								<Input 
+									value= "{/recipient/name}"
+									description="Hello {/recipient/name}"
+									valueLiveUpdate="true"
+									width="60%"
+								/>
+								
+								<List
+									headerText="{i18n>invoiceListTitle}"
+									class="sapUiResponsiveMargin" 
+									width="auto"
+									items="{invoice>/Invoices}"
+								>
+									<items>
+										<ObjectListItem 
+											title="{invoice>Quantity} x {invoice>ProductName}" 
+											number="{
+														parts: [
+															{path: 'invoice>Price'},
+															'EUR'
+														],
+														type: 'sap.ui.model.type.Currency'
+													}"
+													numberUnit="EUR"
+										/>
+									</items>
+								</List>
+									
+							</content>
+						</Panel>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+	
+</mvc:View>
